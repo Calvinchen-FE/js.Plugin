@@ -66,8 +66,12 @@ if (typeof jQuery === "undefined") {
     var mdHeight = "-"+options.height/2+"px";;
     modalDialog.css({width:options.width+"px",height:options.height+"px",marginLeft:mdWidth,marginTop:mdHeight});
     mdClose.click(function(){
+      modalDialog.addClass("animated-hide").end().remove();
+      //解决ie8及以下保用end后不能remove的bug
+      if (!$.support.leadingWhitespace) {
+        modalDialog.remove();
+      }
       mask.remove();
-      modalDialog.remove();
     });
     cancelBtn.click(function(){
         mdClose.trigger("click");
