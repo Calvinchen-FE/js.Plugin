@@ -67,7 +67,7 @@ if (typeof jQuery === "undefined") {
     modalDialog.css({width:options.width+"px",height:options.height+"px",marginLeft:mdWidth,marginTop:mdHeight});
     mdClose.click(function(){
       modalDialog.addClass("animated-hide").end().remove();
-      //解决ie8及以下保用end后不能remove的bug
+      //解决ie8及以下使用end后不能remove的bug
       if (!$.support.leadingWhitespace) {
         modalDialog.remove();
       }
