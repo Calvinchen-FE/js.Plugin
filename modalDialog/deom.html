@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>demo</title>
+    <link rel="stylesheet" type="text/css" href="resources/css/modalDialog.css">
+    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+    <script src="resources/js/modalDialog.js"></script>
+  <body>
+  <input type="button" id="alert" value="alert"><br>
+  <input type="button" id="confirm" value="confirm"><br>
+  <input type="button" id="prompt" value="prompt">
+  <input type="text" id="test"><br>
+  <input type="button" id="iframe" value="iframe"><br>
+  <script type="text/javascript">
+    $("#alert").click(function(){
+      options = {
+        width:320,
+        height:160,
+        title:"warning",
+        msg:"这是一个提示",
+        type:"alert"
+      };
+      grid = new ModalDialog.MessageBox(options);
+      function test(){
+        alert("这是个回调函数");
+      }
+    })
+    $("#confirm").click(function(){
+      options = {
+        width:320,
+        height:160,
+        title:"warning",
+        msg:"这是一个提示",
+        type:"confirm",
+        callback:test
+      };
+      grid = new ModalDialog.MessageBox(options);
+      function test(){
+        alert("这是个回调函数");
+      }
+    })
+    var dataArr = [];
+    $("#prompt").click(function(){
+      options = {
+        width:320,
+        height:160,
+        dataArr:dataArr,
+        title:"这是输入框",
+        type:"prompt",
+        callback:test
+      };
+      grid = new ModalDialog.MessageBox(options);
+      function test(){
+        $("#test").val(dataArr[0])
+      }
+    })
+    $("#iframe").click(function(){
+      options = {
+        width:820,
+        height:360,
+        title:"这是iframe",
+        type:"iframe",
+        src:"https://www.baidu.com/"
+      };
+      grid = new ModalDialog.MessageBox(options);
+      function test(){
+        alert("这是个回调函数");
+      }
+    })
+  </script>
+  </body>
+</html>
