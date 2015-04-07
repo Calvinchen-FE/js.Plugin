@@ -42,6 +42,7 @@ if (typeof jQuery === "undefined") {
       mdWrap.append(mdInput);
       btnWrap.append(cancelBtn);
       okBtn.click(function(){
+        options.dataArr.length=0;
         var inputVal = $(".modal-input").val();
         if($.trim(inputVal)==""){return;}
         options.dataArr.push(inputVal);
