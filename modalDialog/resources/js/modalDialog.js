@@ -66,11 +66,8 @@ if (typeof jQuery === "undefined") {
     var mdHeight = "-"+options.height/2+"px";;
     modalDialog.css({width:options.width+"px",height:options.height+"px",marginLeft:mdWidth,marginTop:mdHeight});
     mdClose.click(function(){
-      modalDialog.addClass("animated-hide").end().remove();
-      //解决ie8及以下使用end后不能remove的bug
-      if (!$.support.leadingWhitespace) {
-        modalDialog.remove();
-      }
+      modalDialog.addClass("animated-hide");
+      setTimeout(function(){modalDialog.remove();},500)
       mask.remove();
     });
     cancelBtn.click(function(){
@@ -87,23 +84,22 @@ if (typeof jQuery === "undefined") {
         }
       },50);
     });
-    drag("modalDialogTitle","modalDialogwrap");
   };
   $.extend(this, {
     "modalDialog": "1.0"
   });
+
   init();
+  drag("modalDialogTitle");
 
-
-  function drag(titleId,parentId){
+  function drag(titleId){
     var div = document.getElementById(titleId);
-    var pDiv = document.getElementById(parentId);
     div.onmousedown=function(e){
       div.style.cursor="move";
       div.parentNode.style.opacity="0.8";
       var oEvent = e||event;
-      var clientX = oEvent.clientX-div.parentElement.offsetLeft;
-      var clientY = oEvent.clientY-div.parentElement.offsetTop;
+      var clientX = oEvent.clientX-div.parentNode.offsetLeft;
+      var clientY = oEvent.clientY-div.parentNode.offsetTop;
 
       var marginLeft = div.parentNode.style.marginLeft;
       marginLeft = Math.abs(marginLeft.replace("px",""));
@@ -123,16 +119,16 @@ if (typeof jQuery === "undefined") {
         var t = oEvent.clientY-clientY+marginTop;
         if(l<marginLeft){
           l=marginLeft;
-        }else if(l>document.documentElement.clientWidth-pDiv.offsetWidth+marginLeft){
-          l=document.documentElement.clientWidth-pDiv.offsetWidth+marginLeft;
+        }else if(l>document.documentElement.clientWidth-div.parentNode.offsetWidth+marginLeft){
+          l=document.documentElement.clientWidth-div.parentNode.offsetWidth+marginLeft;
         }
         if(t<marginTop){
           t=+marginTop;
-        }else if(t>document.documentElement.clientHeight-pDiv.offsetHeight+marginTop){
-          t=document.documentElement.clientHeight-pDiv.offsetHeight+marginTop;
+        }else if(t>document.documentElement.clientHeight-div.parentNode.offsetHeight+marginTop){
+          t=document.documentElement.clientHeight-div.parentNode.offsetHeight+marginTop;
         }
-        div.parentElement.style.left = l+"px";
-        div.parentElement.style.top = t+"px";
+        div.parentNode.style.left = l+"px";
+        div.parentNode.style.top = t+"px";
       }
       function fnUp(){
         div.style.cursor="default";
