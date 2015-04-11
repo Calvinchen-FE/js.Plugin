@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="us">
+<head>
+	<meta charset="utf-8">
+	<title>jQuery UI Example Page</title>
+	<link href="jquery-ui.css" rel="stylesheet">
+	<style>
+	</style>
+</head>
+<body>
+<div id="datepicker"></div>
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<script src="jquery-ui.js"></script>
+<script>
+	$( "#datepicker" ).datepicker({
+		inline: true,
+		backSectionList: [
+			{type:0,date:"2015-04-16"},
+			{type:1,date:"2015-04-17"},
+			{type:2,date:"2015-05-18"}
+		]
+	});
+</script>
+</body>
+</html>
