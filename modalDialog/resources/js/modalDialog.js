@@ -20,7 +20,7 @@ if (typeof jQuery === "undefined") {
     $("body").append(mask);
     var modalDialog = $("<div class='modal-dialog'></div>");
     var mdTitle = $("<div id='modalDialogTitle' class='modal-title'><em>"+options.title+"</em></div>");
-    var mdClose = $("<a class='modal-close'>x</a>");
+    var mdClose = $("<a class='modal-close'>×</a>");
     mdTitle.append(mdClose);
     var mdWrap = $("<div id='modalDialogwrap' class='modal-wrap'></div>");
     var temp = options.msg!==undefined?options.msg:"";
@@ -79,7 +79,7 @@ if (typeof jQuery === "undefined") {
       var timer = setInterval(function(){
         count++;
         modalDialog.toggleClass("modal-scale");  
-        if(count==4){
+        if(count==1){
           clearInterval(timer);
           count=0;
         }
@@ -91,58 +91,6 @@ if (typeof jQuery === "undefined") {
   });
 
   init();
-  drag("modalDialogTitle");
-
-  function drag(titleId){
-    var div = document.getElementById(titleId);
-    div.onmousedown=function(e){
-      div.style.cursor="move";
-      div.parentNode.style.opacity="0.8";
-      var oEvent = e||event;
-      var clientX = oEvent.clientX-div.parentNode.offsetLeft;
-      var clientY = oEvent.clientY-div.parentNode.offsetTop;
-
-      var marginLeft = div.parentNode.style.marginLeft;
-      marginLeft = Math.abs(marginLeft.replace("px",""));
-      var marginTop = div.parentNode.style.marginTop;
-      marginTop = Math.abs(marginTop.replace("px",""));
-      if(div.setCapture){
-        div.onmousemove=fnMove;
-        div.onmouseup=fnUp;
-        div.setCapture();
-      }else{
-        document.onmousemove=fnMove;
-        document.onmouseup=fnUp;
-      }
-      function fnMove(ev){
-        var oEvent = ev||event;
-        var l = oEvent.clientX-clientX+marginLeft;
-        var t = oEvent.clientY-clientY+marginTop;
-        if(l<marginLeft){
-          l=marginLeft;
-        }else if(l>document.documentElement.clientWidth-div.parentNode.offsetWidth+marginLeft){
-          l=document.documentElement.clientWidth-div.parentNode.offsetWidth+marginLeft;
-        }
-        if(t<marginTop){
-          t=+marginTop;
-        }else if(t>document.documentElement.clientHeight-div.parentNode.offsetHeight+marginTop){
-          t=document.documentElement.clientHeight-div.parentNode.offsetHeight+marginTop;
-        }
-        div.parentNode.style.left = l+"px";
-        div.parentNode.style.top = t+"px";
-      }
-      function fnUp(){
-        div.style.cursor="default";
-        div.parentNode.style.opacity="1";
-        this.onmousemove=null;
-        this.onmouseup=null;
-        if(this.releaseCapture){
-          div.releaseCapture();
-        }
-      }
-      return false;
-    };
-  }
   } 
   
 }(jQuery));
