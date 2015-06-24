@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style type="text/css">
+  *{margin: 0;padding: 0;list-style: none;}
+
+     #slider{position: relative;}
+
+     .slider{overflow: hidden;height: 400px;position: relative;}
+
+     .slider li{z-index: 0;opacity: 0;position: absolute;top: 0;left: 0;width: 100%;height: 100%;transition:all 2s;-webkit-transition:all 2s;-ms-transition:all 2s;-moz-transition:all 2s;}
+
+     .slider .on{opacity: 1;}
+
+     .slide-bg{width: 100%;height: 100%;display: block;background-position: 50%;}
+
+
+     .slider-control{position: absolute;bottom: 10px;text-align: center;width: 100%;}
+
+     .slider-control li{display: inline-block;}
+
+     .slider-control a{background: url(dot.png) -13px;width: 13px;height: 13px;display: block;margin: 0 1px;}
+
+     .slider-control a.on{background-position: 0px 0px;}
+
+  </style>
+</head>
+<body>
+  <div id="slider">
+    <ul class="slider">
+      <li><a href="javascript:;"><img src="img1.jpg"></a></li>
+      <li><a href="javascript:;"><img src="img2.jpg"></a></li>
+      <li><a href="javascript:;"><img src="img3.jpg"></a></li>
+      <li><a href="javascript:;"><img src="img4.jpg"></a></li>
+    </ul>
+    <ul class="slider-control">
+      <li><a href="javascript:;"></a></li>
+      <li><a href="javascript:;"></a></li>
+      <li><a href="javascript:;"></a></li>
+      <li><a href="javascript:;"></a></li>
+    </ul>
+  </div>
+    
+
+<script type="text/javascript">
+  (function(){
+
+      var Slider = function(ele,times,control){
+
+          this.ele = ele;
+
+          this.times = times;
+
+          this.control = control;
+
+          this.index = 0;
+
+          this.sliderList = document.querySelectorAll(this.ele);
+
+          this.controlBar = document.querySelectorAll(this.control);
+
+          _this = this;
+
+          for(var i=0;i<_this.controlBar.length;i++){
+
+              this.controlBar[i].index = i;
+
+              if(_this.controlBar.addEventListener){
+
+                  _this.controlBar[i].addEventListener("click",function(){
+                      var p = this.parentNode.parentNode;
+
+                      for(var i=0;i<p.length;i++){
+
+                          if(p.childNodes[i].nodeType==1){
+                              p.childNodes[i].childNodes[0].className="";
+
+                          }
+
+                      }
+
+                      this.className = "on";
+
+                      var temp = this.index;
+
+                      var len = _this.sliderList.length;
+
+                      for(var i = 0; i < len ; i++){
+
+                          _this.sliderList[i].className = "";
+
+                      }
+
+                      _this.sliderList[temp].className = "on";
+
+                      _this.index = temp;
+
+                  })
+
+                }else if(_this.controlBar.attachEvent){
+
+                  _this.controlBar[i].attachEvent("click",function(){
+
+                      var p = this.parentNode.parentNode;
+
+                      for(var i=0;i<p.length;i++){
+
+                          if(p.childNodes[i].nodeType==1){
+
+                              p.childNodes[i].childNodes[0].className="";
+
+                          }
+
+                      }
+
+                      this.className = "on";
+
+                      var temp = this.index;
+
+                      var len = _this.sliderList.length;
+
+                      for(var i = 0; i < len ; i++){
+
+                          _this.sliderList[i].className = "";
+
+                      }
+
+                      _this.sliderList[temp].className = "on";
+
+                      _this.index = temp;
+
+                  },false)
+
+                }
+
+              
+
+          }
+
+      }
+
+      Slider.prototype.play=function(){
+
+          _this = this;
+
+          var len = _this.sliderList.length;
+
+          setInterval(function(){
+
+              _this.index++;
+
+              if(_this.index>=len){_this.index=0;}
+
+              for(var i = 0; i < len ; i++){
+
+                  _this.sliderList[i].index = i;
+
+                  _this.sliderList[i].className = "";
+
+              }
+
+              _this.sliderList[_this.index].className = "on";
+
+              var control = _this.controlBar[0].parentNode.parentNode;
+
+              for(var i=0;i<control.length;i++){
+
+                  if(control.childNodes[i].nodeType==1){
+
+                      control.childNodes[i].childNodes[0].className="";
+
+                  }
+
+              }
+
+              _this.controlBar[_this.index].className = "on";
+
+          },_this.times);
+
+      }
+
+      var slider = new Slider(".slider>li",5000,".slider-control a");
+
+      slider.play();
+
+  })();
+</script>       
+
+            
+
+            
+
+            
+
+            
+
+        
+
+        
+
+            
+
+            
+
+            
+
+            
+
+        
+
+    
+
+    
+
+         
+</body>
+</html>
