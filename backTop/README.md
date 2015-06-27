@@ -2,4 +2,4 @@
 -----------
 ###课程来源<br/>
 [点击这里你可以链接到http://www.imooc.com/learn/425](http://www.imooc.com/learn/425)<br /> 
-[点击这里你可以链接到https://icomoon.io/app/#/select](图标字体下载)
+[图标字体下载](https://icomoon.io/app/#/select)
