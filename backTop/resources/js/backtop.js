@@ -33,9 +33,9 @@ define(['jquery','scrollto'],function($,scrollto){
 		}
 	};
 	$.fn.extend({
-		backTop: function(){
+		backTop: function(opts){
 			return this.each(function(){
-				new BackTop(this,this.opts);
+				new BackTop(this,opts);
 			});
 		}
 	});
