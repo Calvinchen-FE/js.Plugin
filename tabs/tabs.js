@@ -10,8 +10,8 @@ jQuery.fn.tabs = function (control){
     element.find(">[data-tab='"+tabName+"']").addClass("active");
   });
   element.bind("change.tabs",function(e,tabName){
-    control.find(">[data-tab]").removeClass("active");
-    control.find(">[data-tab='"+tabName+"']").addClass("active");
+    control.find(">[data-tab]").removeClass("show").addClass('hide');
+    control.find(">[data-tab='"+tabName+"']").addClass("show").removeClass("hide");
   });
   var firstName = element.find("li:first").attr("data-tab");
   element.trigger("change.tabs",firstName);
