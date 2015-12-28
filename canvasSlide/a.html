@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<body>
+<head>  
+<title>excanvas demo</title>  
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">  
+<!--[if IE]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
+</head>
+<canvas id="myCanvas" width="52" height="52">
+Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+<script>
+window.onload = function(){
+    cycle('myCanvas',35.61);
+
+    function cycle(id,rate){
+        var c=document.getElementById(id);
+        var ctx=c.getContext("2d");
+        ctx.beginPath();
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = 'red';
+        ctx.arc(26,26,24,0,2*Math.PI);
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = 'blue';
+        ctx.translate(26,26);
+        ctx.rotate(Math.PI*-0.5);
+        ctx.arc(0,0,24,0,2*Math.PI*rate/100);
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.font="12px Arial";
+        ctx.textAlign="center";
+        ctx.rotate(Math.PI*0.5);
+        ctx.translate(-26,-26);
+        ctx.fillText(rate+"%",26,30);
+        ctx.closePath();
+    }
+}
+</script> 
+
+</body>
+</html>
